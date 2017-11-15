@@ -1,0 +1,12 @@
+LISTE BENUTZER TMUX BEFEHLE
+
+-> einen Befehl immer mit STRG+B einleiten
+
+ZEICHEN		BEDEUTUNG
+c		neues Fenster
+%		Pane: vertikal
+"		Pane: horizontal
+Pfeiltasten	Navigation zwischen Panes
+&		Fenster beenden
+Zahl		zum jeweiligen Fenster wechseln (s.u.)
+[		Scrollmodus starten, q zum beenden
