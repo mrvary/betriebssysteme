@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int fibo(int num)
 {
@@ -11,17 +12,18 @@ int fibo(int num)
     }
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
+    int result;
     int userInput;
 
-    do {
-        printf("Calculate nth Fibonacci number (n > 0): ");
-        scanf("%d", &userInput);
-    } while (userInput < 1);
-
-    int result = fibo(userInput);
-    printf("Result: %d\n", result);
+    if ( argc == 2) {
+        userInput = atoi(argv[1]);
+        result =  fibo(userInput);
+        printf("Result: %d\n", result);
+    } else {
+        printf("ERROR! Please provide only 1 Argument!");
+    }
 
     return 0;
 }
