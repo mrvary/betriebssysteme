@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
         result =  fibo(userInput);
         printf("Result: %d\n", result);
     } else {
-        printf("ERROR! Please provide only 1 Argument!");
+        printf("ERROR! Please provide only 1 Argument!\n");
     }
 
     return 0;
