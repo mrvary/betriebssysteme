@@ -2,44 +2,69 @@
 #import <string.h>
 #import <stdbool.h>
 
-int main(void) 
+  
+int lastMarker = -1;
+int firstMarker = -1;
+
+void saveMarker(int index) 
 {
-  char input[255];
-  bool active = true;
+    if (firstMarker == -1) {
+      firstMarker = index;
+    } else {
+      lastMarker = index;
+    }
+}
+
+void countMarkers(char input[]) 
+{
   char ch;
-  int lastMarker = -1;
-  int firstMarker = -1;
-
-  printf("Please enter a String: ");
-  fgets(input, 255, stdin);
   int len = strlen(input);
-
-  // count markers
   for (int i = 0; i < len; ++i) 
   {
     ch = input[i];
     if (ch == 33) {
-      if (firstMarker == -1) {
-        firstMarker = i;
-      } else {
-        lastMarker = i;
-      }
+      saveMarker(i);
     }
   }
-  // with 1 marker = ende is last char..TODO
+}
+
+char changeCase(char c)
+{
+  if (c < 123 && c > 96) {
+    c -= 32;
+  } else if (c < 97 && c > 64) {
+    c += 32;
+  }
+  return c;
+}
+
+void convert(char sentence[]) 
+{
+  char ch;
+  bool active = true;
+  int len = strlen(sentence);
+
   for (int i = 0; i < len; ++i) {
-    ch = input[i];
+    ch = sentence[i];
     if (i == firstMarker) {
       active = false;
     } else if (i == lastMarker) {
       active = true;
-    } else if ( ch < 123 && ch > 96 && active) {
-      ch -= 32;
-    } else if ( ch < 97 && ch > 64 && active) {
-      ch += 32;
-    }
-    input[i] = ch;
+    } else if (active) {
+      sentence[i] = changeCase(sentence[i]);
+    } 
   }
+}
+
+int main(void) 
+{
+  char input[255];
+  
+  printf("Please enter a String: ");
+  fgets(input, 255, stdin);
+  
+  countMarkers(input);
+  convert(input);
 
   printf("Result: %s", input);
 
