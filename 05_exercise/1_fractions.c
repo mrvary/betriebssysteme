@@ -6,11 +6,12 @@ typedef struct fraction {
 } Fraction;
 
 void readFraction(Fraction *fraction);
+void printFraction(Fraction *fraction);
 
 int main() {
     Fraction fr;
     readFraction(&fr);
-    printf("Result: %d/%d\n", fr.dividend, fr.divisor);
+    printFraction(&fr);
     return 0;
 }
 
@@ -20,4 +21,8 @@ void readFraction(Fraction *fraction) {
 
     printf("Divisor: ");
     scanf("%d", &(fraction->divisor));
+}
+
+void printFraction(Fraction *fraction) {
+    printf("---> %d/%d\n", fraction->dividend, fraction->divisor);
 }
