@@ -10,6 +10,7 @@ void readFraction(Fraction *fraction);
 void printFraction(Fraction *fraction);
 Fraction *addFractions(Fraction *first, Fraction *second);
 int compareFractions(Fraction *first, Fraction *second);
+Fraction *multiplyFractions(Fraction *first, Fraction *second);
 int ggt(int a, int b);
 void reduce (Fraction *fraction);
 
@@ -20,10 +21,18 @@ int main() {
     readFraction(&fr2);
     // printf("%d\n", compareFractions(&fr1, &fr2));
 
-    Fraction *addition = addFractions(&fr1, &fr2);
+    Fraction *multiplication = multiplyFractions(&fr1, &fr2);
+    // test if non-null
+    if (multiplication) {
+        printf("Multiplikation: ");
+        printFraction(multiplication);
+        free(multiplication);
+    }
 
+    Fraction *addition = addFractions(&fr1, &fr2);
     // test if non-null
     if (addition) {
+        printf("Addition: ");
         printFraction(addition);
         free(addition);
     }
@@ -63,6 +72,15 @@ int compareFractions(Fraction *first, Fraction *second) {
         equal = 1;
     }
     return equal;
+}
+
+Fraction *multiplyFractions(Fraction *first, Fraction *second) {
+    Fraction *result = malloc(sizeof(Fraction));
+    result->dividend = first->dividend * second->dividend;
+    result->divisor = first->divisor * second->divisor;
+    reduce(result);
+
+    return result;
 }
 
 int ggt(int a, int b) {
