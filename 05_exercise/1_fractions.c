@@ -24,7 +24,7 @@ int main() {
     Fraction *multiplication = multiplyFractions(&fr1, &fr2);
     // test if non-null
     if (multiplication) {
-        printf("Multiplikation: ");
+        printf("Multiplication: ");
         printFraction(multiplication);
         free(multiplication);
     }
@@ -49,7 +49,12 @@ void readFraction(Fraction *fraction) {
 }
 
 void printFraction(Fraction *fraction) {
-    printf("---> %d/%d\n", fraction->dividend, fraction->divisor);
+    int diff = fraction->dividend > fraction->divisor;
+    if (diff > 0) {
+        printf("---> %d %d/%d\n", diff, fraction->dividend - fraction->divisor, fraction->divisor);
+    } else {
+        printf("---> %d/%d\n", fraction->dividend, fraction->divisor);
+    }
 }
 
 Fraction *addFractions(Fraction *first, Fraction *second) {
