@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct fraction {
     int divisor;
@@ -16,10 +17,15 @@ int main() {
     Fraction fr2;
     readFraction(&fr1);
     readFraction(&fr2);
-    printf("%d\n", compareFractions(&fr1, &fr2));
+    // printf("%d\n", compareFractions(&fr1, &fr2));
 
-    printFraction(addFractions(&fr1, &fr2));
-    // printf("%d\n", ggt(24, 12));
+    Fraction *addition = addFractions(&fr1, &fr2);
+
+    // test if non-null
+    if (addition) {
+        printFraction(addition);
+        free(addition);
+    }
 
     return 0;
 }
@@ -37,17 +43,17 @@ void printFraction(Fraction *fraction) {
 }
 
 Fraction *addFractions(Fraction *first, Fraction *second) {
-    // multiply with other divisor
     int dividend1 = first->dividend * second->divisor;
     int dividend2 = second->dividend * first->divisor;
     int newDivisor = first->divisor * second->divisor;
     int newDividend = dividend1 + dividend2;
     int divideBy = ggt(newDividend, newDivisor);
 
-    static Fraction result;
-    result.dividend = newDividend / divideBy;
-    result.divisor = newDivisor / divideBy;
-    return &result;
+    Fraction *result = malloc(sizeof(Fraction));
+
+    result->dividend = newDividend / divideBy;
+    result->divisor = newDivisor / divideBy;
+    return result;
 }
 
 int compareFractions(Fraction *first, Fraction *second) {
