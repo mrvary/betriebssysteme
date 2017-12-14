@@ -18,6 +18,7 @@ int main() {
     readFraction(&fr2);
     printf("%d\n", compareFractions(&fr1, &fr2));
 
+    printFraction(addFractions(&fr1, &fr2));
     // printf("%d\n", ggt(24, 12));
 
     return 0;
@@ -35,9 +36,19 @@ void printFraction(Fraction *fraction) {
     printf("---> %d/%d\n", fraction->dividend, fraction->divisor);
 }
 
-// Fraction *addFractions(Fraction *first, Fraction *second) {
+Fraction *addFractions(Fraction *first, Fraction *second) {
+    // multiply with other divisor
+    int dividend1 = first->dividend * second->divisor;
+    int dividend2 = second->dividend * first->divisor;
+    int newDivisor = first->divisor * second->divisor;
+    int newDividend = dividend1 + dividend2;
+    int divideBy = ggt(newDividend, newDivisor);
 
-// }
+    static Fraction result;
+    result.dividend = newDividend / divideBy;
+    result.divisor = newDivisor / divideBy;
+    return &result;
+}
 
 int compareFractions(Fraction *first, Fraction *second) {
     int equal;
