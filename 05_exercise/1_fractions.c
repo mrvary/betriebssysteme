@@ -11,6 +11,7 @@ void printFraction(Fraction *fraction);
 Fraction *addFractions(Fraction *first, Fraction *second);
 int compareFractions(Fraction *first, Fraction *second);
 int ggt(int a, int b);
+void reduce (Fraction *fraction);
 
 int main() {
     Fraction fr1;
@@ -45,14 +46,12 @@ void printFraction(Fraction *fraction) {
 Fraction *addFractions(Fraction *first, Fraction *second) {
     int dividend1 = first->dividend * second->divisor;
     int dividend2 = second->dividend * first->divisor;
-    int newDivisor = first->divisor * second->divisor;
-    int newDividend = dividend1 + dividend2;
-    int divideBy = ggt(newDividend, newDivisor);
 
     Fraction *result = malloc(sizeof(Fraction));
+    result->dividend = dividend1 + dividend2;
+    result->divisor = first->divisor * second->divisor;
+    reduce(result);
 
-    result->dividend = newDividend / divideBy;
-    result->divisor = newDivisor / divideBy;
     return result;
 }
 
@@ -74,4 +73,10 @@ int ggt(int a, int b) {
         b = divRest;
     }
     return a;
+}
+
+void reduce (Fraction *fraction) {
+    int divideBy = ggt(fraction->dividend, fraction->divisor);
+    fraction->dividend /= divideBy;
+    fraction->divisor /= divideBy;
 }
