@@ -6,19 +6,9 @@ typedef struct element {
     struct element *next;
 } Element;
 
-Element *insert( Element *head, int value ) {
-    Element *new = (Element*) malloc(sizeof(Element));
-    new->value = value;
-    new->next = head;
-    return new;
-}
-
-void printElements( Element *head ) {
-    while ( head != NULL ) {
-        printf("%d\n", head->value);
-        head = head->next;
-    }
-}
+Element *insert( Element *head, int value );
+Element *add( Element *head, int value);
+void printElements( Element *head );
 
 int main() {
     Element *head;
@@ -31,6 +21,41 @@ int main() {
     second->next = NULL;
 
     printElements( head );
+    printf("---\n");
+    head = add( head, 3);
+    printElements( head );
+
+    printf("---\n");
+    Element *newhead;
+    newhead = insert( head, 0);
+    printElements( newhead );
 
     return 0;
+}
+
+Element *add( Element *head, int value) {
+    Element *start = head;
+    while ( head->next != NULL ) {
+        head = head->next;
+    }
+
+    Element *new = (Element*) malloc(sizeof(Element));
+    head->next = new;
+    new->value = value;
+    new->next = NULL;
+    return start;
+}
+
+Element *insert( Element *head, int value ) {
+    Element *new = (Element*) malloc(sizeof(Element));
+    new->value = value;
+    new->next = head;
+    return new;
+}
+
+void printElements( Element *head ) {
+    while ( head != NULL ) {
+        printf("%d\n", head->value);
+        head = head->next;
+    }
 }
