@@ -6,6 +6,10 @@ typedef struct element {
     struct element *next;
 } Element;
 
+typedef struct list {
+    Element element;
+} List;
+
 Element *insert( Element *head, int value );
 Element *add( Element *head, int value);
 void printElements( Element *head );
