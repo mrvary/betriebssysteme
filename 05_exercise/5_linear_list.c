@@ -14,6 +14,7 @@ void insert( List *head, int value );
 Element *add( List *list, int value);
 void printElements( Element *head );
 int listSize( const List *list);
+int contains ( const List *list, int value );
 
 int main() {
 
@@ -29,6 +30,8 @@ int main() {
     printElements( list->head );
 
     printf("%d\n", listSize ( list ));
+    printf("%d\n", contains ( list, 3 ));
+    printf("%d\n", contains ( list, 8 ));
 
     return 0;
 }
@@ -74,4 +77,20 @@ int listSize( const List *list) {
     }
 
     return counter;
+}
+
+int contains ( const List *list, int value ) {
+    int valueIsPresent = 0;
+
+    Element *current = list->head;
+
+    while ( current != NULL ) {
+        if ( current->value == value ) {
+            valueIsPresent = 1;
+            break;
+        }
+        current = current->next;
+    }
+
+    return valueIsPresent;
 }
