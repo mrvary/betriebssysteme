@@ -11,7 +11,7 @@ typedef struct list {
 } List;
 
 void insert( List *head, int value );
-Element *add( Element *head, int value);
+Element *add( List *list, int value);
 void printElements( Element *head );
 
 int main() {
@@ -22,23 +22,24 @@ int main() {
 
     insert(list, 1);
     insert(list, 2);
+    add(list, 0);
 
     printElements( list->head );
 
     return 0;
 }
 
-Element *add( Element *head, int value) {
-    Element *start = head;
-    while ( head->next != NULL ) {
-        head = head->next;
+Element *add( List *list, int value) {
+    Element *last = list->head;
+    while ( last->next != NULL ) {
+        last = last->next;
     }
 
     Element *new = (Element*) malloc(sizeof(Element));
-    head->next = new;
+    last->next = new;
     new->value = value;
     new->next = NULL;
-    return start;
+    return new;
 }
 
 void insert( List *list, int value ) {
