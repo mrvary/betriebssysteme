@@ -7,32 +7,23 @@ typedef struct element {
 } Element;
 
 typedef struct list {
-    Element element;
+    Element *head;
 } List;
 
-Element *insert( Element *head, int value );
+void insert( List *head, int value );
 Element *add( Element *head, int value);
 void printElements( Element *head );
 
 int main() {
-    Element *head;
-    head = (Element*) malloc(sizeof(Element));
-    head->value = 1;
 
-    Element *second = (Element*) malloc(sizeof(Element));
-    second->value = 2;
-    head->next = second;
-    second->next = NULL;
+    List *list;
+    list = (List*) malloc(sizeof(List) * 10);
+    list->head = NULL;
 
-    printElements( head );
-    printf("---\n");
-    head = add( head, 3);
-    printElements( head );
+    insert(list, 1);
+    insert(list, 2);
 
-    printf("---\n");
-    Element *newhead;
-    newhead = insert( head, 0);
-    printElements( newhead );
+    printElements( list->head );
 
     return 0;
 }
@@ -50,11 +41,15 @@ Element *add( Element *head, int value) {
     return start;
 }
 
-Element *insert( Element *head, int value ) {
+void insert( List *list, int value ) {
     Element *new = (Element*) malloc(sizeof(Element));
     new->value = value;
-    new->next = head;
-    return new;
+    if ( list->head == NULL) {
+        new->next = NULL;
+    } else {
+        new->next = list->head;
+    }
+    list->head = new;
 }
 
 void printElements( Element *head ) {
