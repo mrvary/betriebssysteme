@@ -13,6 +13,7 @@ typedef struct list {
 void insert( List *head, int value );
 Element *add( List *list, int value);
 void printElements( Element *head );
+int listSize( const List *list);
 
 int main() {
 
@@ -22,9 +23,12 @@ int main() {
 
     insert(list, 1);
     insert(list, 2);
+    insert(list, 3);
     add(list, 0);
 
     printElements( list->head );
+
+    printf("%d\n", listSize ( list ));
 
     return 0;
 }
@@ -58,4 +62,16 @@ void printElements( Element *head ) {
         printf("%d\n", head->value);
         head = head->next;
     }
+}
+
+int listSize( const List *list) {
+    Element *current = list->head;
+    int counter = 0;
+
+    while ( current != NULL ) {
+        current = current->next;
+        counter++;
+    }
+
+    return counter;
 }
