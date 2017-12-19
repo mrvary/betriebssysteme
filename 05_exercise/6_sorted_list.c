@@ -26,6 +26,7 @@ int main() {
     add(list, 8);
     add(list, 1);
     add(list, 6);
+    add(list, 0);
 
     printElements( list );
 
@@ -53,22 +54,20 @@ Element *add( List *list, int value) {
             current->next = new;
         }
     } else {
-        while ( current->value < value && current->next != NULL) {
-            before = current;
-            current = current->next;
+        if ( current-> value > value) {
+            insert(list, value);
+            free(new);
+            new = NULL;
+        } else {
+            while ( current->value < value && current->next != NULL) {
+                before = current;
+                current = current->next;
+            }
+
+            before->next = new;
+            new->next = current;
         }
-
-        before->next = new;
-        new->next = current;
     }
-
-    // if (current->value < value && current->next == NULL) {
-    //     current->next = new;
-    //     new->next = NULL;
-    // } else {
-    //     before->next = new;
-    //     new->next = current;
-    // }
 
     return new;
 }
