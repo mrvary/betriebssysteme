@@ -1,2 +1,2 @@
 # betriebssysteme
-Bash and C Programs
+Bash and C programs for my operating systems class
